@@ -16,6 +16,11 @@ class GameDetailsViewController: UIViewController {
     @IBOutlet var thisView: UIView!
     @IBOutlet weak var innerView: UIView!
     
+    // can't use prepare(for segue) function to change variables with didSet's apparently
+    var incomingName:String?
+    var incomingGame:String?
+    var incomingImage:String?
+    
     var name: String = "default" {
         didSet {
             nameLabel.text = name
@@ -30,16 +35,17 @@ class GameDetailsViewController: UIViewController {
     
     var image:String? = nil {
         didSet {
-            ratingImage.image = UIImage(named: "1Stars")
+            ratingImage.image = UIImage(named: image!)
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        nameLabel.text = "default"
-        gameLabel.text = "default"
-        ratingImage.image = UIImage(named: "2Stars")
+        if let x = incomingName, let y = incomingGame, let z = incomingImage {
+            game = x
+            name = y
+            image = z
+        }
     }
 
     @IBAction func onClick(_ sender: UIButton) {
