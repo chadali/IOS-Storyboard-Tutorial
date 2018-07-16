@@ -61,6 +61,14 @@ extension PlayersViewController {
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.tableView.deselectRow(at: indexPath, animated: false)
+        self.performSegue(withIdentifier: "toGameDetails", sender: indexPath)
+        /*let myPopup = UIStoryboard(name: "Players", bundle: nil).instantiateViewController(withIdentifier: "gameDetailsPopup") as! GameDetailsViewController
+        self.present(myPopup,animated: true)*/
+        
+    }
 }
 
 
